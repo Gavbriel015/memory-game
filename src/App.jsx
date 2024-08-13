@@ -7,8 +7,6 @@ function App() {
 
   const [settings, setSettingsGame] = useSettingsGame();
 
-  console.log(settings)
-
   return (
     <>
       <main>

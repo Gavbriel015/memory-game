@@ -4,9 +4,6 @@ export default function GameOverModal({ scores, players, elapsedTime, moves, res
     const remainingSeconds = elapsedTime % 60;
     const formattedTime = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 
-
-    console.log(scores);
-
     const winner = Math.max(...scores);
     const indexWinner = scores.indexOf(winner);
 

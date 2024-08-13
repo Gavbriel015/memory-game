@@ -1,11 +1,14 @@
 import Card from "./Card";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PlayerTurn from "./PlayerTurn";
 import { iconPaths } from "../utils/icons";
+import GameOverModal from "./GameOverModal";
 import Timer from "./Timer";
 
 export default function Game({ settings }) {
     const { gridSize, players, theme } = settings;
+
+    
 
     const generatePlayers = () => {
         const numPlayers = [];
@@ -53,7 +56,8 @@ export default function Game({ settings }) {
         setCountMoves(0);
         setResetTimer(true);
         setTimeout(() => setResetTimer(false), 0);
-        setGameOver(false); 
+        setGameOver(false);
+        setElapsedTime(0); 
     };
 
     const [board, setBoard] = useState(generateBoard());
@@ -65,6 +69,9 @@ export default function Game({ settings }) {
     const [countMoves, setCountMoves] = useState(0);
     const [resetTimer, setResetTimer] = useState(false);
     const [gameOver, setGameOver] = useState(false); 
+    const [elapsedTime, setElapsedTime] = useState(0);
+
+    console.log(scores)
 
     const changeTurn = () => {
         setCurrentPlayer((prevPlayer) => (prevPlayer + 1) % numberOfPlayers.length);
@@ -153,7 +160,7 @@ export default function Game({ settings }) {
                     <div className="flex w-full gap-6">
                         <div className="rounded-2xl bg-secondary text-primary flex gap-4 items-center p-5 px-10 justify-between w-full max-w-[500px]">
                             <h2 className="font-bold text-xl">Time</h2>
-                            <Timer reset={resetTimer} />
+                            <Timer isGameOver={gameOver} reset={resetTimer} onTimeUpdate={setElapsedTime} />
                         </div>
                         <div className="rounded-2xl bg-secondary text-primary flex gap-4 items-center p-5 px-10 justify-between w-full max-w-[500px]">
                             <h2 className="font-bold text-xl">Moves</h2>
@@ -163,7 +170,9 @@ export default function Game({ settings }) {
                 )}
 
                 {/* GAME OVER MODAL HERE */}
-
+                {gameOver && (
+                    <GameOverModal scores={scores} players={players} elapsedTime={elapsedTime} moves={countMoves}/>
+                )}
             </div>
         </div>
     );

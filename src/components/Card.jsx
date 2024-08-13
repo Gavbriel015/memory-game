@@ -6,7 +6,7 @@ export default function Card({ content, isFlipped, onClick, grid}) {
             case '4x4':
                 return 'w-20 h-20 ss:w-24 ss:h-24 md:w-32 md:h-32';
             case '6x6':
-                return 'w-12 h-12 ss:w-24 ss:h-24 md:w-28 md:h-28';
+                return 'w-12 h-12 ss:w-20 ss:h-20 lg:w-24 md:h-24';
             default:
                 return 'w-16 h-16 md:w-24 md:h-24';
         }

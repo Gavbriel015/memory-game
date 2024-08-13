@@ -11,6 +11,9 @@ export default {
         secondary: "#BACDD8",
         orange: "#FDA517",
         text: "#6293B7"
+      },
+      screens: {
+        ss: '550px'
       }
     },
   },

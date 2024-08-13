@@ -35,7 +35,7 @@ export default function GameMenu({setSettingsGame}) {
         <div className="bg-primary h-screen w-screen">
             <div className="flex flex-col items-center justify-center w-full h-full">
                 <h1 className="text-white font-bold text-4xl mb-12">Memory Game</h1>
-                <div className="w-full bg-white max-w-[700px] px-14 py-10 rounded-3xl">
+                <div className="w-full bg-white max-w-[700px] px-4 lg:px-14 py-10 rounded-3xl">
                     <div className="">
                         <h2 className="text-text font-bold text-xl pb-4">Select Theme</h2>
                         <div className="flex gap-12">
@@ -53,7 +53,7 @@ export default function GameMenu({setSettingsGame}) {
                     </div>
                     <div className="pt-4">
                         <h2 className="text-text font-bold text-xl pb-4">Number of Players</h2>
-                        <div className="flex gap-12">
+                        <div className="flex gap-6">
                             {
                                 settingPlayers.map(player => (
                                     <Button 
@@ -81,7 +81,7 @@ export default function GameMenu({setSettingsGame}) {
                             }
                         </div>
                     </div>
-                    <button onClick={handleSubmit} className="bg-orange text-white py-4 mt-8 w-full rounded-full font-bold text-4xl">Start Game</button>
+                    <button onClick={handleSubmit} className="bg-orange text-white py-3 mt-8 w-full rounded-full font-bold text-3xl">Start Game</button>
                 </div>
             </div>
         </div>

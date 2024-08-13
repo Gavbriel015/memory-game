@@ -71,8 +71,6 @@ export default function Game({ settings }) {
     const [gameOver, setGameOver] = useState(false); 
     const [elapsedTime, setElapsedTime] = useState(0);
 
-    console.log(scores)
-
     const changeTurn = () => {
         setCurrentPlayer((prevPlayer) => (prevPlayer + 1) % numberOfPlayers.length);
     };
@@ -112,10 +110,10 @@ export default function Game({ settings }) {
 
     return (
         <div className="w-screen h-screen">
-            <div className="max-w-[1280px] m-auto flex flex-col py-12 px-16 justify-between items-center h-full w-full">
-                <div className="flex items-center justify-between w-full">
-                    <h1 className="text-primary font-bold text-4xl">Memory Game</h1>
-                    <div className="flex gap-6">
+            <div className="max-w-[1280px] m-auto flex flex-col py-6 md:py-12 md:px-10 justify-between items-center h-full w-full">
+                <div className="flex flex-col md:flex-row items-center justify-between w-full">
+                    <h1 className="text-primary font-bold text-3xl mb-1 md:text-4xl ">Memory Game</h1>
+                    <div className="flex gap-3 ss:gap-4 ss:mt-4">
                         <button
                             onClick={initializeGame}
                             className="bg-orange font-bold text-white py-3 px-5 text-2xl rounded-full"
@@ -131,7 +129,7 @@ export default function Game({ settings }) {
                     </div>
                 </div>
 
-                <div className={`grid gap-4 ${gridSize === '4x4' ? 'grid-cols-4' : 'grid-cols-6 grid-rows-6'}`}>
+                <div className={`grid gap-2 ${gridSize === '4x4' ? 'grid-cols-4' : 'grid-cols-6 grid-rows-6'}`}>
                     {
                         board.map((content, index) => (
                             <Card
@@ -139,6 +137,7 @@ export default function Game({ settings }) {
                                 content={content}
                                 onClick={() => handleCardClick(index)}
                                 isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
+                                grid={gridSize}
                             />
                         ))
                     }
@@ -157,8 +156,8 @@ export default function Game({ settings }) {
                         ))
                     }
                 </div>) : (
-                    <div className="flex w-full gap-6">
-                        <div className="rounded-2xl bg-secondary text-primary flex gap-4 items-center p-5 px-10 justify-between w-full max-w-[500px]">
+                    <div className="flex flex-col justify-center items-center md:flex-row w-full gap-4 mt-4 px-8">
+                        <div className="rounded-2xl bg-secondary text-primary flex gap-4 items-center p-4 px-10 justify-between w-full max-w-[500px]">
                             <h2 className="font-bold text-xl">Time</h2>
                             <Timer isGameOver={gameOver} reset={resetTimer} onTimeUpdate={setElapsedTime} />
                         </div>
@@ -171,7 +170,7 @@ export default function Game({ settings }) {
 
                 {/* GAME OVER MODAL HERE */}
                 {gameOver && (
-                    <GameOverModal scores={scores} players={players} elapsedTime={elapsedTime} moves={countMoves}/>
+                    <GameOverModal restart={initializeGame} scores={scores} players={players} elapsedTime={elapsedTime} moves={countMoves}/>
                 )}
             </div>
         </div>
